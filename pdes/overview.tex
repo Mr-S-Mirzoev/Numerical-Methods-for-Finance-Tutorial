@@ -1,0 +1,33 @@
+For both Finite Difference Method (FDM) and Finite Element Method (FEM), we need to solve $M$ systems of $N$ linear equations of the form:
+
+\[
+Bu_{m+1} = Cu_m + kF_m, \quad m = 0, \ldots, M-1,
+\]
+
+where $F_m = \theta f_{m+1} + (1 - \theta)f_m$.
+
+Let's compare the key elements of FDM and FEM:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Method} & \textbf{FDM} & \textbf{FEM} \\
+\hline
+$u_m$ & Vector of $u_{m,i} \approx u(t_m, x_i)$ & Coefficient vector of $u_N(t_m, x)$ \\
+\hline
+$B$ & $I + k\theta G$ & $I + k\theta M + k\theta A$ \\
+\hline
+$C$ & $I - k(1 - \theta) G$ & $I - k(1 - \theta) M - k(1 - \theta) A$ \\
+\hline
+$G | A$ & $h^{-2} \operatorname{tridiag}(-1, 2, -1)$ & $h^{-1} \operatorname{tridiag}(-1, 2, -1)$ \\
+\hline
+$f^m$ & $f(t_m, x_i)$ & $f^m_i = \int_G f(t_m, x) \cdot b_i(x) \, dx$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Note, that in FDM, $f^m$ represents the discrete values of $f(t_m, x_i)$, whereas in FEM it represents the coefficient vector of $f^m_i = \int_G f(t_m, x) \cdot b_i(x) \, dx$.
+
+Here, $G$ represents the second-order finite difference approximation of the Laplace operator, and $A$ represents the stiffness matrix. For FDM, $u_m$ represents the vector of approximate solutions at each spatial location $x_i$ and time level $t_m$. In contrast, for FEM, $u_m$ represents the coefficient vector of the approximate solution in the finite-dimensional subspace $V_N$. Finally, the matrices $B$ and $C$ are used to discretize the temporal derivative.
+
+By solving these systems of equations, we can obtain the numerical approximations of the solution $u(t, x)$ at different time levels and spatial locations.
