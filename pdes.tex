@@ -11,4 +11,26 @@ In other words, a PDE is an equation involving an unknown function $u$ of two or
 
 PDEs are fundamental in various fields, including physics, engineering, and finance. For example, in the context of option pricing, PDEs are used to model the dynamics of financial instruments and derive the corresponding option pricing equations.
 
+\subsection{Important Examples of PDEs}
+
+Here are some crucial examples of PDEs:
+
+\textbf{Poisson Equation:}
+Given a function $f : G \rightarrow \mathbb{R}$, find $u : G \rightarrow \mathbb{R}$ such that
+\[-\Delta u(x) = -\partial_{x_1 x_1} u(x) - \partial_{x_2 x_2} u(x) - \ldots - \partial_{x_d x_d} u(x) = f(x)\]
+The associated function $F(y^2, y^1, y^0, x) := -\sum_{j=1}^d y^{2}_{j j} - f(x)$.
+
+$f$ is "smooth” enough thus, $u$ exists and is unique, \textcolor{red}{provided we specify
+additional conditions on the boundary}.
+
+\textbf{Heat Equation:}
+Given $f = f(t, x)$, seek $u = u(t, x)$ such that
+\[\partial_t u - \Delta u(x) = f(x, t)\]
+
+The associated function $F(y^2, y^1, y^0, (t, x)) := y^1_0 - \sum_{j=1}^d y^{2}_{j j} - f(x, t)$.
+
+Since the PDE is first order in t, we need an \textcolor{red}{initial condition for t = 0}.
+
+These are just a few examples of PDEs commonly encountered in various mathematical and scientific disciplines. For example, in option pricing, PDEs play a crucial role in formulating and solving pricing equations for derivative instruments.
+
 In the upcoming sections, we will delve deeper into specific numerical methods for solving PDEs and their application to option pricing problems.
