@@ -67,3 +67,88 @@ Similarly, for $g \in C^4$:
 \begin{equation*}
 g'' (x_i) = \frac{g_{i+1} - 2g_i + g_{i-1}}{h^2} + O(h^2) =: {(\delta_{xx}g)}_i + O(h^2).
 \end{equation*}
+
+\subsubsubsection{FD Scheme}
+
+In the Finite Difference Method (FDM), we use a finite difference scheme to replace the partial differential equation $\partial_t u - \partial_{xx}u = f$ with a set of algebraic equations.
+
+\textbf{FD Scheme}
+
+Let $\theta \in [0, 1]$. Then, we define the following set of algebraic equations:
+
+\[
+\begin{cases}
+\mathcal{E}^{m}_{i} = \theta f^{m+1}_{i} + (1 - \theta) f^{m}_{i} & \text{for } i = 1, \ldots, N, \ m = 0, \ldots, M-1, \\
+u^{0}_{i} = u_{0,i} & \text{for } i = 1, \ldots, N, \\
+u^{m}_{k} = 0 & \text{for } k \in \{0, N+1\}, \ m = 0, \ldots, M,
+\end{cases}
+\]
+
+where $\mathcal{E}^{m}_{i}$ represents the finite difference operator:
+
+\begin{align*}
+\mathcal{E}^{m}_{i} := & k^{-1} (u^{m+1}_{i} - u^{m}_{i}) - [\theta(\delta_{xx}u)^{m+1}_{i} + (1 - \theta)(\delta_{xx}u)^{m}_{i}] \\
+= & \frac{u^{m+1}_{i} - u^{m}_{i}}{k} - \\
+- & \left[\theta \frac{(u^{m+1}_{i+1} - 2u^{m+1}_{i} + u^{m+1}_{i-1})}{h^2} + (1 - \theta) \frac{(u^{m}_{i+1} - 2u^{m}_{i} + u^{m}_{i-1})}{h^2} \right].
+\end{align*}
+
+This finite difference scheme represents the discretization of the partial differential equation. The equation $\mathcal{E}^{m}_{i} = 0$ defines the values of the solution $u^{m}_{i}$ at different time levels and spatial grid points, as well as the given source term $f$. By solving this set of algebraic equations iteratively, we can approximate the solution $u(t, x)$ of the original partial differential equation.
+
+\subsubsubsection{FD Scheme in Matrix Form}
+
+The FD scheme can be expressed in matrix form for efficient computation. But, first, we introduce the column vectors:
+
+\[
+u^{m} = \begin{pmatrix}
+u^{m}_{1} \\
+\vdots \\
+u^{m}_{N}
+\end{pmatrix}, \quad
+\mathcal{E}^{m} = \begin{pmatrix}
+\mathcal{E}^{m}_{1} \\
+\vdots \\
+\mathcal{E}^{m}_{N}
+\end{pmatrix}, \quad
+\underline{f}^{m} = \begin{pmatrix}
+f^{m}_{1} \\
+\vdots \\
+f^{m}_{N}
+\end{pmatrix},
+\]
+
+and the tridiagonal $N \times N$ matrix:
+
+\[
+\textbf{G} = h^{-2} \cdot \text{tridiag}(-1, 2, -1).
+\]
+
+Then, the FD scheme $\underline{\mathcal{E}}^{m} = \theta \underline{f}^{m+1} + (1 - \theta) \underline{f}^{m}$ becomes, in matrix form. Given $\underline{u}^{0} = (u_{0}(x_{1}) \hdots u_{0}(x_{N}))^T  \in \mathbb{R}^{N}$, for $m = 0, \ldots, M-1$, find $\underline{u}^{m+1} \in \mathbb{R}^{N}$ such that:
+
+\[
+(\textbf{I} + \theta k \textbf{G}) \underline{u}^{m+1} + (-\textbf{I} + (1 - \theta) k \textbf{G}) \underline{u}^{m} = k [\theta \underline{f}^{m+1} + (1 - \theta) \underline{f}^{m}] =: \underline{F}^{m},
+\]
+
+Or equivalently:
+
+\[
+B \underline{u}^{m+1} = C \underline{u}^{m} + k \underline{F}^{m}, \quad m = 0, \ldots, M-1,
+\]
+
+where
+
+\[
+B = I + \theta kG, \quad C = -I + (1 - \theta) kG.
+\]
+
+This matrix equation allows for the efficient computation of the solution using matrix operations.
+
+\subsubsubsection{Matlab Implementation (FDM)}
+
+Here is a Matlab implementation of the Finite Difference Method (FDM) for solving the heat equation:
+
+\lstinputlisting[
+    language=Octave,
+    caption={Code for deflection at the point of intersection},
+    label={lst:heateq_fdm.m},
+    frame=single
+]{code/heateq_fdm.m}
