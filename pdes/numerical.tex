@@ -160,3 +160,66 @@ This implementation solves the heat equation on the domain $[a, b]$ with a spati
     stepnumber=1,
 ]{code/heateq_fdm.m}
 
+In the \textbf{heateq\_fdm.m} code, the \textit{sp*} methods are used to create sparse matrices efficiently. Sparse matrices are a specialized data structure that is particularly useful when dealing with large matrices that contain a significant number of zero elements. They store only the non-zero elements, reducing memory usage and improving computational efficiency for certain operations.
+
+Here's a breakdown of the sp* methods used in the code:
+
+\begin{itemize}
+    \item speye(N): This method creates a sparse identity matrix of size N x N. The speye function generates the diagonal matrix I in the FD scheme.
+    \item spdiags([-e 2*e -e], -1:1, N, N): This method creates a sparse matrix with the specified diagonals. In this case, it constructs the tridiagonal matrix G with -1 on the lower diagonal, 2 on the main diagonal, and -1 on the upper diagonal. The spdiags function generates the matrix G in the FD scheme.
+\end{itemize}
+
+By utilizing sparse matrices, the code takes advantage of their memory efficiency and optimized algorithms for performing matrix operations, resulting in improved performance for solving the heat equation using the finite difference method.
+
+There's also \nameref{lst:heateq_fdm.py} available in the appendix.
+
+% Add convergence error graphs
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{pdes/fig/converge_error_m.png}
+    \caption{Convergence of error with respect to $M$}
+    \label{fig:converge_error_m}
+\end{figure}
+
+Figure \ref{fig:converge_error_m} shows the convergence of the error of the Finite Difference Method (FDM) solution as the number of time steps, $M$, increases.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{pdes/fig/converge_error_n.png}
+    \caption{Convergence of error with respect to $N$}
+    \label{fig:converge_error_n}
+\end{figure}
+
+Figure \ref{fig:converge_error_n} illustrates the convergence of the error of the FDM solution as the number of spatial grid points, $N$, increases.
+
+% Add MATLAB code reference
+The MATLAB implementation used for generating the convergence error graphs can be found in Appendix \ref{app:convergence_of_heateq_fdm}. In addition, the code is provided in Listing \ref{lst:convergence_of_heateq_fdm} in the appendix.
+
+\subsubsection{The Finite Element Method (FEM)}
+
+The finite element method (FEM) is a numerical technique for solving partial differential equations (PDEs) by discretizing the domain into a collection of finite elements. The basic idea behind the FEM is to represent the solution within each element using a set of basis functions. These basis functions are typically chosen as continuous piecewise polynomials across the element boundaries. By expressing the solution as a linear combination of these basis functions, we can approximate the PDE within each element.
+
+The variational formulation is a vital component of the finite element method. It involves transforming the PDE into an equivalent variational problem, where the goal is finding a solution that minimizes a specific function. This function is typically derived by multiplying the PDE with a test function and integrating it over the domain.
+
+For example, let's consider the heat equation in one dimension:
+\[
+\partial_t u - \partial_{xx} u = f
+\]
+To obtain the variational formulation, we multiply the equation by a smooth test function \(v \in C^{\infty}_0(G)\) satisfying \(v(a) = v(b) = 0\), where \(G\) is the domain. 
+
+Then, integrating the heat equation on the whole domain \(G\), we have:
+\[
+\int_G v \partial_t u\, dx - \int_G v \partial_{xx} u\, dx = \int_G vf\, dx
+\]
+
+Now, integrating by parts:
+\[
+\frac{{d}}{{dt}}\int_G u v \, dx - \left[\partial_x u (t, x) v(x) \right]_{x=a}^{x=b} + \int_G \partial_{x} u \partial_{x} v\, dx = \int_G f v\, dx
+\]
+
+Since $v$ is zero on boundaries, the second term on the left-hand side is cancelled (it equals zero).
+
+This equation represents the variational or weak formulation of the heat equation. The goal of the finite element method is to find the solution \(u\) such that \(u(0, x) = u_0(x)\) and, for all smooth test functions \(v \in C^{\infty}_0(G)\), the following equation holds:
+\[
+\frac{{d}}{{dt}}\int_G u(t, x)v(x)\, dx + \int_G u'(t, x) v'(x)\, dx = \int_G f(t, x) v(x)\, dx
+\]
