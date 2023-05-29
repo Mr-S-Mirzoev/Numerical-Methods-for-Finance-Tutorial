@@ -1,0 +1,40 @@
+\section{Sketch of the Idea Behind PDE Methods}
+
+In this section, we will provide a sketch of the idea behind Partial Differential Equation (PDE) methods for option pricing. PDE methods are a powerful approach to compute the prices of financial options by formulating them as solutions to deterministic PDEs.
+
+Here's an outline of the key concepts:
+
+\subsection{Stochastic Quantities and SDEs}
+
+In option pricing, we deal with stochastic quantities such as the asset price, maturity, strike, and interest rate. In some cases, maturity, strike, and interest rate may be constants. The asset price, denoted as ${(X_t)}_{t > 0}$, follows a Stochastic Differential Equation (SDE) of the form:
+
+\[
+d(X_t) = \mu(t, X_t) dt + \sigma(t, X_t) dW_t
+\]
+
+where $\mu(t, X_t)$ represents the drift term, $\sigma(t, X_t)$ represents the volatility term, and $dW_t$ is the Wiener process (Brownian motion).
+
+\subsection{Finite Maturity and Pay-Off}
+
+Options have a finite maturity or exercise time $T$. At maturity, the price of the option equals its pay-off $g(x)$, which is a function of the underlying asset's value.
+
+\subsection{Feynman-Kac Equation}
+
+The Feynman-Kac equation provides a powerful link between stochastic processes and PDEs. In the context of option pricing, the modified Feynman-Kac equation states that the option price at time t, given current value of underlying $X_t = x$ is equal to conditional expected value of the pay-off $g(X_T)$ at maturity $T$:
+
+\[
+u(t, x) := E[g(X_T) | X_t = x]
+\]
+
+This function $u(t, x)$ is the solution to a deterministic PDE.
+
+\subsection{Numerical Methods for PDEs}
+
+The key idea behind PDE methods for option pricing is to leverage and adapt well-known numerical methods for solving deterministic PDEs. These methods allow us to approximate the solution $u(t, x)$ and compute the option price efficiently.
+
+By discretizing the time and space domains and employing numerical schemes such as finite difference, finite element, or spectral methods, we can approximate the solution to the PDE and obtain the option price $u(t, x)$ for a given time $t$ and asset value $x$.
+
+Using/adapting these numerical methods for PDEs enables us to efficiently compute option prices and gain insights into the behavior of financial derivatives.
+
+This sketch only provides a high-level overview of the idea behind PDE methods for option pricing. In the following sections, we will delve deeper into specific numerical techniques and their application to different types of options.
+
