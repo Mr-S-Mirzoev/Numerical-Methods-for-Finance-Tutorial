@@ -1,0 +1,22 @@
+Before diving into the details, let's establish the notations used throughout this tutorial. The clarity in notation is crucial for better understanding. Here are the key notations:
+
+\begin{itemize}
+    \item $X_t$: The asset price at time $t$.
+    \item $T$: The maturity or exercise time of the option.
+    \item $g(x)$: The option's pay-off function is a function of the underlying asset's value $x$.
+    \item $\mu(t, X_t)$: The drift term in the asset price SDE.
+    \item $\sigma(t, X_t)$: The volatility term in the asset price SDE.
+    \item $dW_t$: The Wiener process or Brownian motion.
+    \item $u(t, x)$: The option price at time $t$, given the current value of the underlying asset $X_t = x$.
+    \item For $\alpha = (\alpha_1, \ldots, \alpha_d) \in \mathbb{N}_0^d$ multiindex, and $G \subset \mathbb{R}^d$ (open): set $|\alpha| = \sum_{i=1}^{d} \alpha_i$.
+    \item For smooth $u : G \rightarrow \mathbb{R}$ and $x = (x_1, \ldots, x_d) \in G$, define:
+    \[
+    D^\alpha u(x) := \frac{{\partial^{|\alpha|} u(x)}}{{\partial x_1^{\alpha_1} \cdots \partial x_d^{\alpha_d}}} = {\partial^{\alpha_1}_{x_1}} \cdots {\partial^{\alpha_d}_{x_d}} u(x).
+    \]
+    \item Elements of $G \subset \mathbb{R}^d$ are points $x = (x_1, \ldots, x_d)$.
+    \item For $k \in \mathbb{N}_0$, $D^k u(x) := \{D^\alpha u(x) : |\alpha| = k\}$ is the set of all partial derivatives of order $k$.
+\end{itemize}
+
+These notations will be used consistently throughout the tutorial to ensure clarity and consistency in the explanations and examples.
+
+Now that we have established the notations let's delve deeper into the specific numerical methods for solving PDEs in the context of option pricing.

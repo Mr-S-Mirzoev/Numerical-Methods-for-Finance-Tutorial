@@ -1,12 +1,12 @@
 \section{Sketch of the Idea Behind PDE Methods}
 
-In this section, we will provide a sketch of the idea behind Partial Differential Equation (PDE) methods for option pricing. PDE methods are a powerful approach to compute the prices of financial options by formulating them as solutions to deterministic PDEs.
+This section will sketch the idea behind Partial Differential Equation (PDE) methods for option pricing. PDE methods are a powerful approach to computing the prices of financial options by formulating them as solutions to deterministic PDEs.
 
 Here's an outline of the key concepts:
 
 \subsection{Stochastic Quantities and SDEs}
 
-In option pricing, we deal with stochastic quantities such as the asset price, maturity, strike, and interest rate. In some cases, maturity, strike, and interest rate may be constants. The asset price, denoted as ${(X_t)}_{t > 0}$, follows a Stochastic Differential Equation (SDE) of the form:
+We deal with stochastic quantities in option pricing, such as asset price, maturity, strike, and interest rate. In some cases, maturity, strike, and interest rate may be constants. The asset price, denoted as ${(X_t)}_{t > 0}$, follows a Stochastic Differential Equation (SDE) of the form:
 
 \[
 d(X_t) = \mu(t, X_t) dt + \sigma(t, X_t) dW_t
@@ -20,7 +20,7 @@ Options have a finite maturity or exercise time $T$. At maturity, the price of t
 
 \subsection{Feynman-Kac Equation}
 
-The Feynman-Kac equation provides a powerful link between stochastic processes and PDEs. In the context of option pricing, the modified Feynman-Kac equation states that the option price at time t, given current value of underlying $X_t = x$ is equal to conditional expected value of the pay-off $g(X_T)$ at maturity $T$:
+The Feynman-Kac equation provides a powerful link between stochastic processes and PDEs. For example, in the context of option pricing, the modified Feynman-Kac equation states that the option price at time $t$, given the current value of the underlying asset $X_t = x$, is equal to the conditional expected value of the pay-off $g(X_T)$ at maturity $T$:
 
 \[
 u(t, x) := E[g(X_T) | X_t = x]
@@ -30,11 +30,23 @@ This function $u(t, x)$ is the solution to a deterministic PDE.
 
 \subsection{Numerical Methods for PDEs}
 
-The key idea behind PDE methods for option pricing is to leverage and adapt well-known numerical methods for solving deterministic PDEs. These methods allow us to approximate the solution $u(t, x)$ and compute the option price efficiently.
+The goal of PDE methods for option pricing is to use a computer to approximate the function $u(t, x)$. However, a tradeoff exists between achieving high accuracy and maintaining low computational expense. The challenge is to find the "optimal" approximation method, also known as a numerical scheme or method.
 
-By discretizing the time and space domains and employing numerical schemes such as finite difference, finite element, or spectral methods, we can approximate the solution to the PDE and obtain the option price $u(t, x)$ for a given time $t$ and asset value $x$.
+Two popular numerical schemes for solving PDEs are:
+\begin{enumerate}
+    \item \textbf{Finite Difference Methods (FDM):} The idea behind FDM is to replace the partial derivative $\frac{\partial u}{\partial x}$ with a difference quotient. This approach is relatively easier to understand and implement. However, it can become challenging when dealing with advanced market models or complex PDEs.
+    
+    \item \textbf{Finite Element Methods (FEM):} FEM involves reformulating the PDE and exploiting the linearity of solution operators. This method requires establishing a more theoretical framework but has a broader scope for handling various PDEs.
+\end{enumerate}
 
-Using/adapting these numerical methods for PDEs enables us to efficiently compute option prices and gain insights into the behavior of financial derivatives.
+When working with numerical methods for PDEs, there are important numerical issues to consider, particularly for linear equations. Two key concerns are:
+\begin{itemize}
+    \item \textbf{Convergence:} Ensuring that the numerical approximation converges to the true solution as the grid is refined.
+    
+    \item \textbf{Stability:} Guaranteeing that minor errors in the input data or numerical approximations do not lead to significant deviations in the solution.
+\end{itemize}
 
-This sketch only provides a high-level overview of the idea behind PDE methods for option pricing. In the following sections, we will delve deeper into specific numerical techniques and their application to different types of options.
+Proper consideration of these issues is crucial to obtain reliable and accurate results in numerical option pricing.
+
+This sketch provides a slightly detailed overview of the numerical methods used in PDE approaches for option pricing. The following sections will delve deeper into specific numerical techniques and their application to different options.
 
