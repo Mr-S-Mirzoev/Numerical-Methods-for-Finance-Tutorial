@@ -1,4 +1,12 @@
-\usepackage{amsmath, amssymb}
+\usepackage{amsmath, amssymb, amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\DeclareMathOperator*{\supess}{ess\,sup}
+
 \usepackage{bigints}
 \usepackage{graphicx}
 \usepackage{float}

@@ -1,0 +1,127 @@
+\subsection{Definitions}
+
+Let $G = (a, b)$ denote a possibly unbounded interval, and let $p \in [1, \infty]$.
+
+\begin{definition}[$W^{1,p}(G)$]
+\[
+W^{1,p}(G) := \{ u \in L^p(G) : \exists g \in L^p(G) \text{ such that } \int_G u\phi' = -\int_G g\phi \quad \forall \phi \in C^1_0(G) \},
+\]
+\end{definition}
+
+\begin{definition}
+$H^1(G) := W^{1,2}(G)$.
+\end{definition}
+
+\begin{definition}[Weak derivative]
+The function $g \in L^p(G)$ is the \textit{weak derivative} of $u \in L^p(G)$, and we write $u' = g$.
+\end{definition}
+
+\subsubsection{Spaces of higher order}
+
+Spaces of differentiable functions are defined recursively.
+
+\begin{definition}[$W^{m,p}(G)$]
+Let $m \geq 2$ be an integer and $1 \leq p \leq \infty$. Then,
+\[
+W^{m,p}(G) := \{ u \in W^{m-1,p}(G) : u^{(0)} \in W^{m-1,p}(G) \},
+\]
+\end{definition}
+
+\begin{definition}
+$H^m(G) := W^{m,2}(G)$.
+\end{definition}
+
+We equip $W^{m,p}(G)$ with the norm
+\[
+\|u\|_{W^{m,p}(G)} :=
+\begin{cases}
+\left( \sum_{i=0}^m \int_G |D^iu|^p \, dx \right)^{1/p} & 1 \leq p < \infty, \\
+\sum_{i=0}^m \supess_{G} |D^iu| & p = \infty,
+\end{cases}
+\]
+
+\subsection{Banach and Hilbert Spaces}
+
+\begin{definition}[Cauchy Sequence]
+A sequence $(x_n)$ in a metric space is called a \textit{Cauchy sequence} if, for every positive real number $\epsilon$, there exists a positive integer $N$ such that for all $n, m \geq N$, we have $d(x_n, x_m) < \epsilon$, where $d$ is the distance function in the metric space.
+\end{definition}
+
+\begin{definition}[Complete Space]
+A \textit{complete space} is a metric space in which every Cauchy sequence converges to a limit point also in this space.
+\end{definition}
+
+\begin{definition}[Banach Space]
+A \textit{Banach space} is a complete normed vector space.
+\end{definition}
+
+\begin{definition}[Hilbert Space]
+A \textit{Hilbert space} is a complete inner product space.
+\end{definition}
+
+\subsection{Sobolev Embedding}
+
+\begin{proposition}
+For $1 \leq p \leq \infty$, the space $(W^{m,p}(G), \| \cdot \|_{W^{m,p}(G)})$ is a Banach space. For $p = 2$, it is a Hilbert space.
+\end{proposition}
+
+Functions $u \in W^{1,p}(G)$ are \textit{essentially} continuous.
+
+\begin{theorem}[Sobolev Embedding for $W^{1,p}(G)$]
+Assume $G \subset \mathbb{R}$ is a bounded open interval, and let $u \in W^{1,p}(G)$. Then, there exists $\exists \tilde{u} \in C^0(\overline{G})$ such that
+\[
+u = \tilde{u} \quad \text{a.e. on } \overline{G},
+\]
+and for all $x_1, x_2 \in G$,
+\[
+\tilde{u}(x_2) - \tilde{u}(x_1) = \int_{x_1}^{x_2} u'(\xi) \, d\xi.
+\]
+The theorem will prove important when we define interpolation operators.
+\end{theorem}
+
+\subsection{Spaces with Boundary Conditions}
+
+\begin{definition}
+Let $1 \leq p < \infty$. $W^{1,p}_0(G) := \{ u \in \overline{C^1_0(G)} : \|u\|_{W^{1,p}(G)} < \infty \}$.
+\end{definition}
+
+\begin{definition}
+$H^1_0(G) := W^{1,2}_0(G)$.
+\end{definition}
+
+\begin{proposition}
+Assume $G \subset \mathbb{R}$ is a bounded open interval, let $1 \leq p < \infty$, and let $u \in W^{1,p}(G)$. Then,
+\[
+u \in W^{1,p}_0(G) \Leftrightarrow \tilde{u} = 0 \text{ on } \partial G.
+\]
+\end{proposition}
+
+\begin{theorem}[Poincaré Inequality]
+Assume that $G \subset \mathbb{R}$ is bounded and let $1 \leq p < \infty$. Then, there exists $C(|G|, p)$ such that for all $u \in W^{1,p}_0(G)$,
+\[
+\|u\|_{L^p(G)} \leq C \|u\|_{L^p(G)}.
+\]
+\end{theorem}
+
+\subsection{Bochner Spaces involving Time}
+
+Let $H$ be a real Hilbert space equipped with norm $\| \cdot \|_H$, $J := (0, T)$ with $T > 0$, and $1 \leq p \leq \infty$. Define
+\[
+L^p(J; H) := \{ u: J \to H \text{ measurable} : \|u\|_{L^p(J;H)} < \infty \},
+\]
+with norm
+\[
+\|u\|_{L^p(J;H)} :=
+\begin{cases}
+\left( \int_J \|u(t)\|_H^p \, dt \right)^{1/p}, & \text{if } 1 \leq p < \infty, \\
+\supess_{J} \|u(t)\|_H, & \text{if } p = \infty.
+\end{cases}
+\]
+
+For $n \in \mathbb{N}_0$, let $C^n(J; H)$ be the $H$-valued functions that are $n$-times continuously differentiable (i.e., in $C^n$) with respect to $t$.
+
+\begin{definition}
+Let $u \in L^1(J; H)$. Then, $L^1(J; H)'$ denotes the set of weak derivatives of $u$, denoted by $v = u'$, such that
+\[
+\int_J u(t) \varphi'(t) \, dt = - \int_J v(t) \varphi(t) \, dt, \quad \forall \varphi \in C_0^\infty(J).
+\]
+\end{definition}
