@@ -1,0 +1,69 @@
+\subsubsection{Heat Equation}
+
+The heat equation describes the heat distribution in a given region over time. It can be represented as a system of equations as follows:
+
+\begin{equation*}
+\begin{cases}
+\partial_t u - \partial_{xx} u = f(t, x) & \text{in } J \times G, \\
+u = 0 & \text{on } J \times \partial G, \\
+u(0, \cdot) = u_0 & \text{in } G,
+\end{cases}
+\end{equation*}
+
+Where:
+\begin{itemize}
+\item The equation $u(0, \cdot) = u_0$ in $G$ represents the \textcolor{blue}{initial condition}.
+\item The equation $u = 0$ on $J \times \partial G$ represents the \textcolor{blue}{boundary condition}. Here, it is of Dirichlet type and homogeneous.
+\end{itemize}
+
+Such partial differential equations are known as initial-boundary value problems.
+
+\subsubsection{Discretization of the PDE}
+
+To solve the heat equation numerically, we discretize the computational domain $J \times G$ using a \textbf{discrete grid}. The grid is defined as follows:
+
+\begin{equation*}
+\{(t_m, x_i)\}, \quad i = 0, \ldots, N+1, \quad m = 0, \ldots, M,
+\end{equation*}
+
+where $x_i$ are the \textcolor{blue}{spatial grid points} with a \textcolor{blue}{spacing (or space step size)} of $h$, and $t_m$ are the \textcolor{blue}{time levels} with a \textcolor{blue}{time step size} of $k$.
+
+\medskip
+
+The spatial grid points $x_i$ are determined by the interval $G = (a, b)$ and the number of grid points $N$ as $x_i = a + ih$, where $h = \frac{b-a}{N+1}$. 
+
+The time levels $t_m$ are determined by the interval $J = (0, T)$ and the number of time steps $M$ as $t_m = mk$, where $k = \frac{T}{M}$.
+
+\medskip
+
+Next, we represent the exact solution $u(t, x)$ by its values on the grid:
+
+\begin{equation*}
+u(t, x) \rightarrow \{u_{m,i} = u(t_m, x_i)\}, \quad i = 0, \ldots, N+1, \quad m = 0, \ldots, M.
+\end{equation*}
+
+\textcolor{blue}{The goal is to approximate the values $\{u^{m}_{i}\}$}. Values of the solution between grid points are then found \textbf{using some interpolation method}.
+
+\subsubsection{The Finite Difference Method (FDM)}
+
+The Finite Difference Method (FDM) is a commonly used numerical method for solving partial differential equations. It approximates the derivatives of a function using only its values on the grid. Let's start by defining the difference quotients, also known as finite differences.
+
+\textbf{Difference Quotients (= Finite Differences)}
+
+Consider a function $g(x)$ of one variable. Assume that $g \in C^2$. Using Taylor's formula, we have:
+
+\begin{equation*}
+g' (x) = \frac{g(x + h) - g(x)}{h} - \frac{h}{2} g''(\xi), \quad \xi \in [x, x + h].
+\end{equation*}
+
+If $g_i = g(x_i)$ are the values of $g$ on the grid $\{x_i\}$, we obtain:
+
+\begin{equation*}
+g' (x_i) = \frac{g_{i+1} - g_i}{h} + O(h) =: {(\delta^{+}_{x} g)}_i + O(h).
+\end{equation*}
+
+Similarly, for $g \in C^4$:
+
+\begin{equation*}
+g'' (x_i) = \frac{g_{i+1} - 2g_i + g_{i-1}}{h^2} + O(h^2) =: {(\delta_{xx}g)}_i + O(h^2).
+\end{equation*}
