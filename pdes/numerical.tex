@@ -144,14 +144,19 @@ This matrix equation allows for the efficient computation of the solution using 
 
 \subsubsubsection{Matlab Implementation (FDM)}
 
-Here is a Matlab implementation of the Finite Difference Method (FDM) for solving the heat equation:
+Here is a Matlab implementation of the Finite Difference Method (FDM) for solving the heat equation.
+
+This implementation solves the heat equation on the domain $[a, b]$ with a spatial grid size $N$, a time grid size $M$, and the parameter $\theta$. The initial condition $u_0(x)$ is defined as $u_0(x) = x \cdot \sin(\pi x)$, and the source term $f(x, t)$ is defined as $f(x, t) = -(1-\pi^2) \cdot x \cdot \sin(\pi x) - 2\pi \cdot \cos(\pi x)$. Finally, the function returns the error of the numerical solution.
+
+\newpage
 
 \lstinputlisting[
     language=Octave,
-    caption={Code for deflection at the point of intersection},
+    caption={Finite Difference Method (FDM) for solving the heat equation},
     label={lst:heateq_fdm.m},
     frame=single,
     breaklines=true,
     numbers=left,
     stepnumber=1,
 ]{code/heateq_fdm.m}
+
