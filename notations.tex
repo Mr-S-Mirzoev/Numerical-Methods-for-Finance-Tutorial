@@ -8,15 +8,25 @@ Before diving into the details, let's establish the notations used throughout th
     \item $\sigma(t, X_t)$: The volatility term in the asset price SDE.
     \item $dW_t$: The Wiener process or Brownian motion.
     \item $u(t, x)$: The option price at time $t$, given the current value of the underlying asset $X_t = x$.
-    \item For $\alpha = (\alpha_1, \ldots, \alpha_d) \in \mathbb{N}_0^d$ multiindex, and $G \subset \mathbb{R}^d$ (open): set $|\alpha| = \sum_{i=1}^{d} \alpha_i$.
+    \item For $\alpha = (\alpha_1, \ldots, \alpha_d) \in \mathbb{N}_0^d$ multiindex, and $G \subset \mathbb{R}^d$ (open):
+    \[|\alpha| = \sum_{i=1}^d \alpha_i.\]
     \item For smooth $u : G \rightarrow \mathbb{R}$ and $x = (x_1, \ldots, x_d) \in G$, define:
-    \[
-    D^\alpha u(x) := \frac{{\partial^{|\alpha|} u(x)}}{{\partial x_1^{\alpha_1} \cdots \partial x_d^{\alpha_d}}} = {\partial^{\alpha_1}_{x_1}} \cdots {\partial^{\alpha_d}_{x_d}} u(x).
-    \]
-    \item Elements of $G \subset \mathbb{R}^d$ are points $x = (x_1, \ldots, x_d)$.
-    \item For $k \in \mathbb{N}_0$, $D^k u(x) := \{D^\alpha u(x) : |\alpha| = k\}$ is the set of all partial derivatives of order $k$.
+    \[D^\alpha u(x) := \frac{{\partial^{|\alpha|} u(x)}}{{\partial x_1^{\alpha_1} \cdots \partial x_d^{\alpha_d}}} = {\partial^{\alpha_1}_{x_1}} \cdots \partial^{\alpha_d}_{x_d} u(x).\]
+    \item If $k = 1$, arrange the elements of $D^1 u(x) =: Du(x)$ in a vector:
+    \[Du = (\nabla u)^T = \left(\frac{{\partial u}}{{\partial x_1}}, \ldots, \frac{{\partial u}}{{\partial x_d}}\right).\]
+    \item If $k = 2$, arrange the elements of $D^2 u(x)$ in a matrix:
+    \[D^2 u = \begin{bmatrix}
+    \frac{{\partial^2 u}}{{\partial x_1^2}} & \frac{{\partial^2 u}}{{\partial x_1 \partial x_2}} & \ldots & \frac{{\partial^2 u}}{{\partial x_1 \partial x_d}} \\
+    \frac{{\partial^2 u}}{{\partial x_2 \partial x_1}} & \frac{{\partial^2 u}}{{\partial x_2^2}} & \ldots & \vdots \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \frac{{\partial^2 u}}{{\partial x_d \partial x_1}} & \ldots & \ldots & \frac{{\partial^2 u}}{{\partial x_d^2}}
+    \end{bmatrix}.\]
+    Please note that for brevity, I have only shown the four corner elements of the matrix, and the rest can be represented using ellipsis ($\ldots$).
+    \item Write $\frac{{\partial^2 u}}{{\partial x_i \partial x_j}}$ as ${\partial_{x_i x_j} u}$. Hence, the Laplacian $\Delta u$ of $u$ can be written as:
+    \[\Delta u := \sum_{i=1}^{d} \partial_{x_i x_i} u = \text{tr}(D^2 u).\]
+    \item A partial differential equation (PDE) is an equation involving an unknown function of two or more variables and certain of its derivatives.
 \end{itemize}
 
 These notations will be used consistently throughout the tutorial to ensure clarity and consistency in the explanations and examples.
 
-Now that we have established the notations let's delve deeper into the specific numerical methods for solving PDEs in the context of option pricing.
+Now that we have established the notations, let's delve deeper into the specific numerical methods for solving PDEs in the context of option pricing.
