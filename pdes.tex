@@ -34,3 +34,26 @@ Since the PDE is first order in t, we need an \textcolor{red}{initial condition 
 These are just a few examples of PDEs commonly encountered in various mathematical and scientific disciplines. For example, in option pricing, PDEs play a crucial role in formulating and solving pricing equations for derivative instruments.
 
 In the upcoming sections, we will delve deeper into specific numerical methods for solving PDEs and their application to option pricing problems.
+
+\subsection{Types of PDEs}
+
+Let's consider a linear 2nd-order PDE in $d + 1$ variables. The function $F$ has the form
+\[F(D^2u, Du, u, x) = -\sum_{i,j=0}^d a_{ij}(x) \partial_{x_i x_j} u + \sum_{i=0}^d b_i(x) \partial_{x_i} u + c(x) u - f(x).\]
+Here, $a_{ij}$, $b_i$, $c$, and $f$ are given real-valued functions, and $A(x) = (a_{ij}(x))_{i,j=0}^d$ is a symmetric matrix with real eigenvalues $\lambda_0(x) \leq \lambda_1(x) \leq \ldots \leq \lambda_d(x)$.
+
+We can classify the PDE based on its properties:
+
+\textbf{Elliptic PDE:}
+The PDE is called elliptic if $\lambda_i(x) \neq 0$ for all $i$ and $\mathrm{sign}(\lambda_0(x)) = \ldots = \mathrm{sign}(\lambda_d(x))$.
+
+\textbf{Parabolic PDE:}
+The PDE is called parabolic if there exists a unique $j \in \{0, \ldots, d\}$ such that $\lambda_j(x) = 0$ and $\mathrm{rank}(A(x), b(x)) = d + 1$.
+
+\textbf{Hyperbolic PDE:}
+The PDE is called hyperbolic if $\lambda_i(x) \neq 0$ for all $i$ and there exists a unique $j \in \{0, \ldots, d\}$ such that $\mathrm{sign}(\lambda_j(x)) \neq \mathrm{sign}(\lambda_k(x))$ for $k \in \{0, \ldots, d\} \setminus \{j\}$.
+
+The PDE is classified as elliptic, parabolic, or hyperbolic on $G$ if it exhibits the respective properties for all $x \in G$.
+
+Understanding the type of PDE is essential for selecting appropriate numerical methods for solving them.
+
+In the upcoming sections, we will delve deeper into specific numerical methods for solving PDEs and their application to option pricing problems.
